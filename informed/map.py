@@ -1,5 +1,7 @@
 import os
 import collections
+import numpy as np
+import itertools
 
 BasePoint = collections.namedtuple('BasePoint', ['x', 'y'])
 class Point(BasePoint):
@@ -26,7 +28,6 @@ class Poly:
 
 
 class Map:
-
     def __init__(self, start, end, polygons):
         tp = type(polygons)
         assert(tp is list or tp is tuple)
@@ -39,6 +40,7 @@ class Map:
         self.polygons = polygons
         self.start = start
         self.end = end
+        self._graph = None
 
 
     @staticmethod
@@ -51,6 +53,23 @@ class Map:
                 polyes.append(Poly.from_str(line))
         return Map(start, end, polyes) 
 
+    @property
+    def graph(self):
+        if self._graph is not None:
+            return self._graph
+        else:
+            graph = {}
+            all_points = [point for poly in self.polygons for point in poly.points]
+            # a line is a pair of different points
+            lines = [line for line in itertools.product(all_points, all_points) if line[0] != line[1]]
+
+            return graph
+            
+
+
+
+
+
 
 if __name__ == '__main__':
     fin = 'input.txt'
@@ -58,3 +77,4 @@ if __name__ == '__main__':
     print(map.start)
     print(map.end)
     print(map.polygons)
+    map.graph
