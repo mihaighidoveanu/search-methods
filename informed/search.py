@@ -33,6 +33,7 @@ def best_first_search(graph, start, end):
     heapq.heappush(pq, (0, start))
     while len(pq) != 0:
         _, point = heapq.heappop(pq)
+        print(point)
         if point == end:
             print('Finished')
             return None
@@ -40,7 +41,7 @@ def best_first_search(graph, start, end):
             for neighbor in graph[point]:
                 if neighbor not in visited:
                     visited.add(neighbor)
-                    dist = np.linalg.norm( point - neighbor)
+                    dist = np.linalg.norm( neighbor - end)
                     heapq.heappush(pq, (dist, neighbor))
     print('Not found')
 
