@@ -33,7 +33,29 @@ def dfs(maze, state):
 
 
 def bfs():
-    pass
+    maze = copy.deepcopy(maze)
+    queue = [state]
+    path = [state]
+
+    while len(queue) != 0 :
+        state = queue.pop(0)
+        point = state.point
+
+        if maze.is_finish(point):
+            print('FINISH')
+            print('Traversed matrix')
+            for row in maze.matrix:
+                for val in row:
+                    print(f'{val:d}   ', end = '')
+                print()
+            return point 
+        maze.visit(point)
+        neighbours = state.neighbours()
+        # print('Neighbors', neighbours)
+        for  nstate in neighbours:
+            if maze.can_visit(nstate.point):
+                # print('Add Neighbour ', nstate)
+                queue.append(nstate)
 
 from maze import Maze, State
 
