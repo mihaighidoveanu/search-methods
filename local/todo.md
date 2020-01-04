@@ -1,0 +1,2 @@
+# Bug
+- fitness function wrong
