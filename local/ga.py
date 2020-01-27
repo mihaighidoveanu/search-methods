@@ -140,6 +140,6 @@ class NQueens(AbstractGenetic):
 
 
 if __name__ == '__main__':
-    problem = NQueens(n_queens = 8, size = 4, steps = 1, mutatation_proba = 0.5)
+    problem = NQueens(n_queens = 4, size = 10, steps = 1000, mutatation_proba = 0.5)
     best = problem.solve()
     print(problem)
